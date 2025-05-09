@@ -25,7 +25,7 @@ export const SearchBar = () => {
   const debouncedSearch = debounce(handleSearch, 200)
 
   return (
-    <>
+    <div>
       <label htmlFor="showSearch" className="mr-4">
         Search
       </label>
@@ -35,6 +35,6 @@ export const SearchBar = () => {
         placeholder="🔍"
         onChange={debouncedSearch}
       />
-    </>
+    </div>
   )
 }

@@ -47,9 +47,6 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   return (
     <div className="flex flex-col items-center justify-items-center gap-8">
-      <div className="w-full p-4 border-b-2 border-[var(--color-gold)] text-right text-[var(--color-gold)]">
-        <SearchBar />
-      </div>
       <div className="w-full flex gap-2 overflow-x-auto text-nowrap">
         <Genres genres={genres} />
       </div>
