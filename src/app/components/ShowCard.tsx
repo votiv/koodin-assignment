@@ -1,4 +1,3 @@
-import { SyntheticEvent } from 'react'
 import Image from 'next/image'
 
 type ShowCardProps = {
@@ -8,7 +7,7 @@ type ShowCardProps = {
 }
 
 export const ShowCard = ({ title, image, score }: ShowCardProps) => (
-  <div className="flex flex-col justify-between gap-4 shadow-md transition-transform duration-200 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl">
+  <div className="h-[428px] flex flex-col justify-between gap-4 shadow-md transition-transform duration-200 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl">
     <Image src={image} alt={title} width={500} height={500} />
 
     <div className="flex justify-between p-2">
