@@ -19,6 +19,33 @@
   }
 }
 
+html {
+  --gold-lightness: 78.75%;
+  --gold-chroma: 0.1537;
+  --gold-hue: 91.36;
+
+  --blue-lightness: 59.63%;
+  --blue-chroma: 0.1139;
+  --blue-hue: 229.11;
+
+  --black-lightness: 14.61%;
+  --black-chroma: 0.0312;
+  --black-hue: 106.57;
+
+  --white-lightness: 98%;
+  --white-chroma: 0.0053;
+  --white-hue: 17.25;
+
+  --color-gold: oklch(var(--gold-lightness) var(--gold-chroma) var(--gold-hue));
+  --color-blue: oklch(var(--blue-lightness) var(--blue-chroma) var(--blue-hue));
+  --color-black: oklch(
+          var(--black-lightness) var(--black-chroma) var(--black-hue)
+  );
+  --color-white: oklch(
+          var(--white-lightness) var(--white-chroma) var(--white-hue)
+  );
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
