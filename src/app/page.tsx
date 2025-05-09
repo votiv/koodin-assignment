@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { fetchPaginated, fetchSearch } from '~/app/api'
 import { SearchBar } from '~/app/components/SearchBar'
 import { Shows } from '~/app/components/Shows'
+import { Genres } from '~/app/components/Genres'
 
 export type Show = {
   id: number
@@ -25,21 +26,32 @@ export type Show = {
 }
 
 type HomeProps = {
-  searchParams: Promise<{ q?: string }>
+  searchParams: Promise<{ q?: string; genre?: string }>
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const { q } = await searchParams
-  const shows: Show[] | undefined = q
+  const { q, genre } = await searchParams
+  let shows: Show[] | undefined = q
     ? await fetchSearch(q)
     : await fetchPaginated()
 
   if (!shows) notFound()
 
+  const genres = shows.reduce((genres, show) => {
+    return Array.from(new Set([...genres, ...show.genres]))
+  }, [] as string[])
+
+  if (genre) {
+    shows = shows.filter(show => show.genres.indexOf(genre) !== -1)
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16">
+    <div className="flex flex-col items-center justify-items-center gap-8">
       <div className="w-full p-4 border-b-2 border-[var(--color-gold)] text-right text-[var(--color-gold)]">
         <SearchBar />
+      </div>
+      <div className="w-full flex gap-2 overflow-x-auto text-nowrap">
+        <Genres genres={genres} />
       </div>
       <main className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <Suspense fallback={<div>Loading...</div>} key="listOfShows">
