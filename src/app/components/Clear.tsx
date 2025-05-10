@@ -13,8 +13,8 @@ export const Clear = () => (
       x2="34"
       y2="34"
       stroke="white"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
     <line
       x1="34"
@@ -22,8 +22,8 @@ export const Clear = () => (
       x2="14"
       y2="34"
       stroke="white"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
   </svg>
 )

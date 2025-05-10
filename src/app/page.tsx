@@ -47,9 +47,8 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   return (
     <div className="flex flex-col items-center justify-items-center gap-8">
-      <div className="w-full flex gap-2 overflow-x-auto text-nowrap">
-        <Genres genres={genres} />
-      </div>
+      <Genres genres={genres} />
+
       <main className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <Suspense fallback={<div>Loading...</div>} key="listOfShows">
           <Shows
