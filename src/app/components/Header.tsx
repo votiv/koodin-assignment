@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 import { SearchBar } from '~/app/components/SearchBar'
+import { BackButton } from '~/app/components/BackButton'
 
 export const Header = () => {
   const router = useRouter()
@@ -25,6 +26,7 @@ export const Header = () => {
         />
       </button>
       {!slug && <SearchBar />}
+      {slug && <BackButton />}
     </div>
   )
 }

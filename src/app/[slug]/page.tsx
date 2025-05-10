@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 import { Show } from '~/app/page'
 import { bruteSanitize } from '~/app/utils'
@@ -26,18 +27,19 @@ const ShowDetails = async ({ params }: ShowDetailsProps) => {
 
   return (
     <div className="w-full flex flex-col md:flex-row gap-16">
-      <div className="flex-1 text-center md:text-right">
+      <div className="text-center flex-1 md:text-right">
         <h1 className="text-6xl font-bold mb-4">{show.name}</h1>
 
         <h5>{show.genres.join(', ')}</h5>
 
         <p className="text-2xl mt-4">{bruteSanitize(show.summary)}</p>
       </div>
+
       <div className="flex-1 m-auto md:m-0">
         <Image
           src={show.image?.original ?? null}
           alt={show.name}
-          width={1000}
+          width={500}
           height={300}
         />
       </div>

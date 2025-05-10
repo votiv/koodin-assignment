@@ -12,7 +12,7 @@ export const Clear = () => (
       y1="14"
       x2="34"
       y2="34"
-      stroke="white"
+      stroke="#deb522"
       strokeWidth="3"
       strokeLinecap="round"
     />
@@ -21,7 +21,7 @@ export const Clear = () => (
       y1="14"
       x2="14"
       y2="34"
-      stroke="white"
+      stroke="#deb522"
       strokeWidth="3"
       strokeLinecap="round"
     />
