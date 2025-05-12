@@ -15,7 +15,7 @@ export const Genres = ({ genres }: GenreProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const params = new URLSearchParams(searchParams)
-  const [isClearVisible, setIsClearVisible] = useState(false)
+  const [isClearVisible, setIsClearVisible] = useState(!!params.get('genre'))
 
   const handleGenreSelect = (genre: string) => () => {
     params.set('genre', genre)
@@ -30,33 +30,42 @@ export const Genres = ({ genres }: GenreProps) => {
   }
 
   return (
-    <div className="w-full flex gap-2">
+    <div className="relative w-full h-[48px]">
       <AnimatePresence initial={false}>
         {isClearVisible ? (
           <motion.button
             initial={{ opacity: 0, scale: 0, width: 0 }}
-            animate={{ opacity: 1, scale: 1, width: 'auto' }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              width: 'auto',
+              transition: { delay: 0.2 },
+            }}
             exit={{ opacity: 0, scale: 0, width: 0 }}
             onClick={handleClear}
-            className="cursor-pointer"
+            className="w-[48px] h-[48px] cursor-pointer absolute top-0 left-0"
             key="clearButton"
           >
             <Clear />
           </motion.button>
         ) : null}
-      </AnimatePresence>
 
-      <div className="flex gap-2 overflow-x-auto text-nowrap">
-        {genres?.map(genre => (
-          <button
-            key={genre}
-            className={`rounded-sm border-2 p-2 cursor-pointer ${genre === params.get('genre') ? 'border-[var(--color-gold)]' : 'border-[var(--color-blue)]'}`}
-            onClick={handleGenreSelect(genre)}
-          >
-            {genre}
-          </button>
-        ))}
-      </div>
+        <motion.div
+          initial={{ marginLeft: 0 }}
+          animate={{ marginLeft: isClearVisible ? '48px' : 0 }}
+          className="h-[48px] flex gap-2 overflow-x-auto text-nowrap"
+        >
+          {genres?.map(genre => (
+            <button
+              key={genre}
+              className={`rounded-sm border-2 p-2 cursor-pointer ${genre === params.get('genre') ? 'border-[var(--color-gold)]' : 'border-[var(--color-blue)]'}`}
+              onClick={handleGenreSelect(genre)}
+            >
+              {genre}
+            </button>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   )
 }
