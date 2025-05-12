@@ -4,19 +4,19 @@ import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 import { SearchBar } from '~/app/components/SearchBar'
-import { BackButton } from '~/app/components/BackButton'
+import { Button } from '~/app/components/Button'
 
 export const Header = () => {
   const router = useRouter()
   const { slug } = useParams<{ slug: string }>()
 
-  const handleNav = () => {
+  const handleHomeNav = () => {
     router.push('/')
   }
 
   return (
     <div className="w-full flex justify-between mb-8 border-b-2 border-[var(--color-gold)] text-right text-[var(--color-gold)]">
-      <button onClick={handleNav} className="cursor-pointer">
+      <button onClick={handleHomeNav} className="cursor-pointer">
         <Image
           src="/logo.svg"
           alt="Logo"
@@ -26,7 +26,7 @@ export const Header = () => {
         />
       </button>
       {!slug && <SearchBar />}
-      {slug && <BackButton />}
+      {slug && <Button buttonAction={handleHomeNav}>Back</Button>}
     </div>
   )
 }
