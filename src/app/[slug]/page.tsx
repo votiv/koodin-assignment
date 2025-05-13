@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { redirect } from 'next/navigation'
 
-import { Show } from '~/app/page'
 import { bruteSanitize } from '~/app/utils'
+import { getShow } from '~/app/api'
 
 type ShowDetailsProps = {
   params: Promise<{ slug: string }>
@@ -12,18 +11,11 @@ type ShowDetailsProps = {
 const ShowDetails = async ({ params }: ShowDetailsProps) => {
   const { slug } = await params
 
-  const response = await fetch(
-    `https://api.tvmaze.com/lookup/shows?imdb=${slug}`,
-    {
-      method: 'GET',
-    }
-  )
+  const show = await getShow(slug)
 
-  if (!response.ok) {
+  if (!show) {
     notFound()
   }
-
-  const show: Show = await response.json()
 
   return (
     <div className="w-full flex flex-col md:flex-row gap-16">

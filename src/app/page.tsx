@@ -1,29 +1,9 @@
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 
-import { fetchPaginated, fetchSearch } from '~/app/api'
-import { SearchBar } from '~/app/components/SearchBar'
+import { getPaginated, getSearch, type Show } from '~/app/api'
 import { Shows } from '~/app/components/Shows'
 import { Genres } from '~/app/components/Genres'
-
-export type Show = {
-  id: number
-  name: string
-  image: {
-    medium: string
-    original: string
-  }
-  rating: {
-    average: number
-  }
-  externals: {
-    imdb: string
-    thetvdb: number
-    tvrage: number
-  }
-  genres: string[]
-  summary: string
-}
 
 type HomeProps = {
   searchParams: Promise<{ q?: string; genre?: string }>
@@ -31,9 +11,7 @@ type HomeProps = {
 
 const Home = async ({ searchParams }: HomeProps) => {
   const { q, genre } = await searchParams
-  let shows: Show[] | undefined = q
-    ? await fetchSearch(q)
-    : await fetchPaginated()
+  let shows: Show[] | undefined = q ? await getSearch(q) : await getPaginated()
 
   if (!shows) notFound()
 

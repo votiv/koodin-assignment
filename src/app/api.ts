@@ -1,27 +1,50 @@
-import { Show } from '~/app/page'
+type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
-export const fetchSearch = async (query: string) => {
-  const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
-
-  if (!response.ok) {
-    return undefined
+export type Show = {
+  id: number
+  name: string
+  image: {
+    medium: string
+    original: string
   }
-
-  const searchShows: { score: number; show: Show }[] = await response.json()
-
-  return searchShows.map(ss => ss.show)
+  rating: {
+    average: number
+  }
+  externals: {
+    imdb: string
+    thetvdb: number
+    tvrage: number
+  }
+  genres: string[]
+  summary: string
 }
 
-export const fetchPaginated = async (page: number = 0) => {
-  const response = await fetch(`https://api.tvmaze.com/shows?page=${page}`, {
-    method: 'GET',
+const fetcher = async <R>(url: string, method: Methods = 'GET') => {
+  const response = await fetch(`https://api.tvmaze.com/${url}`, {
+    method,
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
 
   if (!response.ok) {
     return undefined
   }
 
-  const paginatedShows: Show[] = await response.json()
-
-  return paginatedShows
+  return (await response.json()) as R
 }
+
+export const getSearch = async (query: string) => {
+  const searchShows = await fetcher<{ score: number; show: Show }[]>(
+    `search/shows?q=${query}`
+  )
+
+  return searchShows && searchShows.map(ss => ss.show)
+}
+
+export const getPaginated = async (page: number = 0) =>
+  await fetcher<Show[]>(`shows?page=${page}`)
+
+export const getShow = async (id: string) =>
+  await fetcher<Show>(`lookup/shows?imdb=${id}`)

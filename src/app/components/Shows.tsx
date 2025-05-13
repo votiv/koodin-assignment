@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { ShowCard } from '~/app/components/ShowCard'
-import { Show } from '~/app/page'
+import { type Show } from '~/app/api'
 
 type ShowsProps = {
   shows: Show[]
