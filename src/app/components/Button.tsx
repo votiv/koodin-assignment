@@ -1,8 +1,8 @@
 'use client'
 
-import { type PropsWithChildren } from 'react'
+import { type HTMLAttributes, type PropsWithChildren } from 'react'
 
-type ButtonProps = {
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonAction: () => void
 }
 
