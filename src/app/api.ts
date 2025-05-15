@@ -57,8 +57,7 @@ export const getSearch = async (query: string) => {
   return isError(searchShows) ? searchShows : searchShows.map(ss => ss.show)
 }
 
-export const getPaginated = async (page: number = 0) =>
-  await fetcher<Show[]>(`shows?page=${page}`)
+export const getAllShows = async () => await fetcher<Show[]>('shows')
 
 export const getShow = async (id: string) =>
   await fetcher<Show>(`lookup/shows?imdb=${id}`)

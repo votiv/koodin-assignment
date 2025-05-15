@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 
-import { getPaginated, getSearch } from '~/app/api'
+import { getAllShows, getSearch } from '~/app/api'
 import { Shows } from '~/app/components/Shows'
 import { Spinner } from '~/app/components/Spinner'
 
@@ -15,7 +15,7 @@ const Home = async ({ searchParams }: HomeProps) => {
     <div className="flex flex-col items-center justify-items-center gap-8">
       <main className="w-full">
         <Suspense fallback={<Spinner />} key="listOfShows">
-          <Shows showsPromise={q ? getSearch(q) : getPaginated()} />
+          <Shows showsPromise={q ? getSearch(q) : getAllShows()} />
         </Suspense>
       </main>
     </div>

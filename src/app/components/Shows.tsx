@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { toast } from 'react-hot-toast'
 import { use } from 'react'
 
 import { ShowCard } from '~/app/components/ShowCard'
@@ -14,7 +13,7 @@ export const Shows = ({ showsPromise }: ShowsProps) => {
   const shows = use(showsPromise)
   if (isError(shows)) {
     const errorMessage = getErrorMessage(shows.code)
-    toast.error(errorMessage)
+
     throw new Error(errorMessage)
   }
 
