@@ -7,7 +7,7 @@ type ShowCardProps = {
 }
 
 export const ShowCard = ({ title, image, score }: ShowCardProps) => (
-  <div className="h-full flex flex-col shadow-md shadow-stone-800 transition-transform duration-200 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl">
+  <div className="w-48 h-full flex flex-col shadow-md shadow-stone-800 transition-transform duration-200 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-2xl">
     <Image
       src={image}
       alt={title}
