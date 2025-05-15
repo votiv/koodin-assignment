@@ -36,12 +36,14 @@ const fetcher = async <R>(url: string, method: Methods = 'GET') => {
   })
 
   if (!response.ok) {
-    const error: ShowsAppError = {
+    if (response.status === 500) {
+      throw new Error('A global error occurred')
+    }
+
+    return {
       message: `An error occurred with code: ${response.status}`,
       code: response.status,
     }
-
-    return error
   }
 
   const data: R = await response.json()

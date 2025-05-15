@@ -3,7 +3,7 @@ import { use } from 'react'
 
 import { ShowCard } from '~/app/components/ShowCard'
 import { type Show, type ShowsAppError } from '~/app/api'
-import { getErrorMessage, isError } from '~/app/utils'
+import { isError } from '~/app/utils'
 
 type ShowsProps = {
   showsPromise: Promise<Show[] | ShowsAppError>
@@ -12,9 +12,7 @@ type ShowsProps = {
 export const Shows = ({ showsPromise }: ShowsProps) => {
   const shows = use(showsPromise)
   if (isError(shows)) {
-    const errorMessage = getErrorMessage(shows.code)
-
-    throw new Error(errorMessage)
+    throw new Error('The shows could not be loaded.')
   }
 
   const grouped = shows.reduce(

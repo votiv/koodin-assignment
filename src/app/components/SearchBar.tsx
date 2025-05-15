@@ -38,7 +38,7 @@ export const SearchBar = () => {
       <div className="relative flex">
         <input
           name="showSearch"
-          className="outline-1 rounded-sm p-2 pr-10"
+          className="outline-1 border-1 rounded-sm p-2 pr-10"
           placeholder="Search shows by name 🔍"
           defaultValue={initialSearch}
         />

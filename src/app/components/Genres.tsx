@@ -4,8 +4,6 @@ import { useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
 
-import { Clear } from '~/app/components/Clear'
-
 type GenreProps = {
   genres: string[]
 }
@@ -46,7 +44,7 @@ export const Genres = ({ genres }: GenreProps) => {
             className="w-[48px] h-[48px] cursor-pointer absolute top-0 left-0"
             key="clearButton"
           >
-            <Clear />
+            X
           </motion.button>
         ) : null}
 
