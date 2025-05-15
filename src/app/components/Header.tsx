@@ -12,7 +12,7 @@ export const Header = () => {
   const { slug } = useParams<{ slug: string }>()
 
   return (
-    <div className="w-full flex justify-between mb-8 border-b-2 border-[var(--color-gold)] text-right text-[var(--color-gold)]">
+    <div className="w-full flex justify-between mb-8 border-b-2 border-[var(--color-gold)] text-right text-[var(--color-gold)] pb-4">
       <Link href="/">
         <Image
           src="/logo.svg"

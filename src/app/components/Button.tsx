@@ -1,12 +1,15 @@
 'use client'
 
-import { type HTMLAttributes, type PropsWithChildren } from 'react'
+import { type ButtonHTMLAttributes, type PropsWithChildren } from 'react'
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const Button = ({
   children,
+  className,
   ...rest
-}: PropsWithChildren<HTMLAttributes<HTMLButtonElement>>) => (
-  <button {...rest} className="cursor-pointer">
+}: PropsWithChildren<ButtonProps>) => (
+  <button className={`cursor-pointer ${className}`} {...rest}>
     {children}
   </button>
 )
