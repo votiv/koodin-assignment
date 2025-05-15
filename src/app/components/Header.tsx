@@ -1,22 +1,17 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { SearchBar } from '~/app/components/SearchBar'
-import { Button } from '~/app/components/Button'
 
 export const Header = () => {
-  const router = useRouter()
   const { slug } = useParams<{ slug: string }>()
-
-  const handleHomeNav = () => {
-    router.push('/')
-  }
 
   return (
     <div className="w-full flex justify-between mb-8 border-b-2 border-[var(--color-gold)] text-right text-[var(--color-gold)]">
-      <button onClick={handleHomeNav} className="cursor-pointer">
+      <Link href="/">
         <Image
           src="/logo.svg"
           alt="Logo"
@@ -24,9 +19,13 @@ export const Header = () => {
           height={56}
           className="-scale-x-100"
         />
-      </button>
+      </Link>
       {!slug && <SearchBar />}
-      {slug && <Button buttonAction={handleHomeNav}>Back</Button>}
+      {slug && (
+        <Link href="/" className="flex items-center">
+          Back
+        </Link>
+      )}
     </div>
   )
 }
