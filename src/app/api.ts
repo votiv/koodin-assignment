@@ -1,3 +1,5 @@
+import { isError } from '~/app/utils'
+
 type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
 export type Show = {
@@ -19,6 +21,11 @@ export type Show = {
   summary: string
 }
 
+export type ShowsAppError = {
+  code: number
+  message: string
+}
+
 const fetcher = async <R>(url: string, method: Methods = 'GET') => {
   const response = await fetch(`https://api.tvmaze.com/${url}`, {
     method,
@@ -29,10 +36,17 @@ const fetcher = async <R>(url: string, method: Methods = 'GET') => {
   })
 
   if (!response.ok) {
-    return undefined
+    const error: ShowsAppError = {
+      message: `An error occurred with code: ${response.status}`,
+      code: response.status,
+    }
+
+    return error
   }
 
-  return (await response.json()) as R
+  const data: R = await response.json()
+
+  return data
 }
 
 export const getSearch = async (query: string) => {
@@ -40,7 +54,7 @@ export const getSearch = async (query: string) => {
     `search/shows?q=${query}`
   )
 
-  return searchShows && searchShows.map(ss => ss.show)
+  return isError(searchShows) ? searchShows : searchShows.map(ss => ss.show)
 }
 
 export const getPaginated = async (page: number = 0) =>

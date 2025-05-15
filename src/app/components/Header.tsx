@@ -3,8 +3,10 @@
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { SearchBar } from '~/app/components/SearchBar'
+import { Spinner } from '~/app/components/Spinner'
 
 export const Header = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -20,7 +22,7 @@ export const Header = () => {
           className="-scale-x-100"
         />
       </Link>
-      {!slug && <SearchBar />}
+      <Suspense fallback={<Spinner />}>{!slug && <SearchBar />}</Suspense>
       {slug && (
         <Link href="/" className="flex items-center">
           Back

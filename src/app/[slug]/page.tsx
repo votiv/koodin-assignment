@@ -1,7 +1,6 @@
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
 
-import { bruteSanitize } from '~/app/utils'
+import { bruteSanitize, getErrorMessage, isError } from '~/app/utils'
 import { getShow } from '~/app/api'
 
 type ShowDetailsProps = {
@@ -10,11 +9,10 @@ type ShowDetailsProps = {
 
 const ShowDetails = async ({ params }: ShowDetailsProps) => {
   const { slug } = await params
-
   const show = await getShow(slug)
 
-  if (!show) {
-    notFound()
+  if (isError(show)) {
+    throw new Error(getErrorMessage(show.code))
   }
 
   return (
