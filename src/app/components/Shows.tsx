@@ -37,13 +37,17 @@ export const Shows = ({ showsPromise }: ShowsProps) => {
   return groupedShows.length === 0 ? (
     <div className="w-full text-center">no shows where found</div>
   ) : (
-    <div>
+    <section>
       {groupedShows.map(([genre, shows]) => (
         <div key={genre} className="flex flex-col gap-4 mb-16">
           <h2 className="text-4xl">{genre}</h2>
           <div className="flex gap-4 overflow-x-auto">
             {shows.map(show => (
-              <Link href={`/${show.externals?.imdb}`} key={show.id}>
+              <Link
+                href={`/${show.externals?.imdb}`}
+                key={show.id}
+                data-testid="showLink"
+              >
                 <ShowCard
                   title={show.name}
                   image={
@@ -57,6 +61,6 @@ export const Shows = ({ showsPromise }: ShowsProps) => {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   )
 }
